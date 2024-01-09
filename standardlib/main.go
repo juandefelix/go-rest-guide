@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"net/http"
+	"regexp"
 )
 
 
@@ -34,39 +35,39 @@ func (h *homeHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 func InternalErrorServerHandler(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusInternalServerError)
-	w.Write([]byte"500 Internal Server Error")
+	w.Write([]byte("500 Internal Server Error"))
 }
 
 func NotFoundHandler(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusNotFound)
-	w.Write([]byte"404 Not Found")
+	w.Write([]byte("404 Not Found"))
 }
 
 type RecipesHandler struct{
 	store recipeStore
 }
 
-type NewRecipesHandler(s recipeStore) *RecipesHandler {
-	return &RecipesHandler {
-		store s
+func NewRecipesHandler(s recipeStore) *RecipesHandler {
+	return &RecipesHandler{
+		store: s,
 	}
 }
 
 func (h *RecipesHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	switch {
-	case r.Method === http.MethodPost && RecipeRe.MatchString(r.URL.Path):
+	case r.Method == http.MethodPost && RecipeRe.MatchString(r.URL.Path):
 		h.CreateRecipe(w, r)
 		return
-	case r.Method === http.MethodGet && RecipeRe.MatchString(r.URL.Path):
+	case r.Method == http.MethodGet && RecipeRe.MatchString(r.URL.Path):
 		h.ListRecipe(w, r)
 		return
-	case r.Method === http.MethodGet && RecipeReWithId.MatchString(r.URL.Path):
+	case r.Method == http.MethodGet && RecipeReWithId.MatchString(r.URL.Path):
 		h.ReadRecipe(w, r)
 		return
-	case r.Method === http.MethodUpdate && RecipeReWithId.MatchString(r.URL.Path):
+	case r.Method == http.MethodUpdate && RecipeReWithId.MatchString(r.URL.Path):
 		h.UpdateRecipe(w, r)
 		return
-	case r.Method === http.MethodDelete && RecipeReWithId.MatchString(r.URL.Path):
+	case r.Method == http.MethodDelete && RecipeReWithId.MatchString(r.URL.Path):
 		h.DeleteRecipe(w, r)
 		return
 	}
@@ -88,13 +89,14 @@ func (h *RecipesHandler) CreateRecipe(w http.ResponseWriter, r *http.Request) {
 
 	w.WriteHeader(http.StatusOK)
 }
+
 func (h *RecipesHandler) ListRecipe(w http.ResponseWriter, r *http.Request) {}
 func (h *RecipesHandler) ReadRecipe(w http.ResponseWriter, r *http.Request) {}
 func (h *RecipesHandler) UpdateRecipe(w http.ResponseWriter, r *http.Request) {}
 func (h *RecipesHandler) DeleteRecipe(w http.ResponseWriter, r *http.Request) {}
 
 
-type recipeStore inteface {
+type recipeStore interface {
 	Add(name string, recipe recipe.Recipe) error
 	Get(name string) (recipe.Recipe, error)
 	Update(name string, recipe recipe.Recipe) error
