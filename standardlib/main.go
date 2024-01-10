@@ -137,8 +137,48 @@ func (h *RecipesHandler) ReadRecipe(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 	w.Write(jsonByte)
 }
-func (h *RecipesHandler) UpdateRecipe(w http.ResponseWriter, r *http.Request) {}
-func (h *RecipesHandler) DeleteRecipe(w http.ResponseWriter, r *http.Request) {}
+
+func (h *RecipesHandler) UpdateRecipe(w http.ResponseWriter, r *http.Request) {
+	matches := RecipeReWithId.FindStringSubmatch(r.URL.Path)
+
+	if len(matches) < 2 {
+		InternalErrorServerHandler(w, r)
+		return
+	}
+
+    var recipe recipes.Recipe
+    if err := json.NewDecoder(r.Body).Decode(&recipe); err != nil {
+        InternalErrorServerHandler(w, r)
+        return
+    }
+
+    if err := h.store.Update(matches[1], recipe); err != nil {
+		if err == recipes.NotFoundErr {
+			NotFoundHandler(w, r)
+			return
+		}
+
+		InternalErrorServerHandler(w, r)
+		return
+	}
+
+	w.WriteHeader(http.StatusOK)
+}
+
+func (h *RecipesHandler) DeleteRecipe(w http.ResponseWriter, r *http.Request) {
+	matches := RecipeReWithId.FindStringSubmatch(r.URL.Path)
+	if len(matches) < 2 {
+        InternalErrorServerHandler(w, r)
+        return
+    }
+
+    if err :=h.store.Remove(matches[1]); err != nil {
+    	InternalErrorServerHandler(w, r)
+        return
+    }
+
+    w.WriteHeader(http.StatusOK)
+}
 
 
 type recipeStore interface {
