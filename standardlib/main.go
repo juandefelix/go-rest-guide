@@ -93,8 +93,50 @@ func (h *RecipesHandler) CreateRecipe(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 }
 
-func (h *RecipesHandler) ListRecipe(w http.ResponseWriter, r *http.Request) {}
-func (h *RecipesHandler) ReadRecipe(w http.ResponseWriter, r *http.Request) {}
+func (h *RecipesHandler) ListRecipe(w http.ResponseWriter, r *http.Request) {
+	resources, err := h.store.List()
+
+	jsonBytes, err := json.Marshal(resources)
+	if err != nil {
+		InternalErrorServerHandler(w, r)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	w.Write(jsonBytes)
+}
+
+func (h *RecipesHandler) ReadRecipe(w http.ResponseWriter, r *http.Request) {
+	matches := RecipeReWithId.FindStringSubmatch(r.URL.Path)
+
+	if len(matches) < 2 {
+		InternalErrorServerHandler(w, r)
+		return
+	}
+
+	recipe, err := h.store.Get(matches[1])
+
+	if err != nil {
+		if err == recipes.NotFoundErr {
+			NotFoundHandler(w, r)
+			return
+		}
+
+		InternalErrorServerHandler(w, r)
+		return
+	}
+
+	jsonByte, err := json.Marshal(recipe)
+	if err != nil {
+		InternalErrorServerHandler(w, r)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	w.Write(jsonByte)
+}
 func (h *RecipesHandler) UpdateRecipe(w http.ResponseWriter, r *http.Request) {}
 func (h *RecipesHandler) DeleteRecipe(w http.ResponseWriter, r *http.Request) {}
 
