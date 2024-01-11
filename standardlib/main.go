@@ -11,7 +11,7 @@ import (
 
 
 var (
-	RecipeRe = regexp.MustCompile(`^/recipes/$`)
+	RecipeRe = regexp.MustCompile(`^/recipes/*$`)
 	RecipeReWithId = regexp.MustCompile(`^/recipes/([a-z0-9]+(?:-[a-z0-9]+)+)$`)
 )
 
