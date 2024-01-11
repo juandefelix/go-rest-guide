@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"net/http"
 	"regexp"
-	"example/jetbrains-tutorials/pkg/recipes"
+	"example/jetbraind-rest-tutorial/pkg/recipes"
 
 	"github.com/gosimple/slug"
 )
