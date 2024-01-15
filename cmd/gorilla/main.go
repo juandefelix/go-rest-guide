@@ -26,18 +26,10 @@ func NotFoundHandler(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	store := recipes.NewMemStore()
-	recipesHandler := NewRecipesHandler(store)
-	home := homeHandler{}
-
 	router := mux.NewRouter()
 
-	router.HandleFunc("/", home.ServeHTTP)
-	router.HandleFunc("/recipes", recipesHandler.ListRecipes).Methods("GET")
-	router.HandleFunc("/recipes", recipesHandler.CreateRecipe).Methods("POST")
-	router.HandleFunc("/recipes/{id}", recipesHandler.GetRecipe).Methods("GET")
-	router.HandleFunc("/recipes/{id}", recipesHandler.UpdateRecipe).Methods("PUT")
-	router.HandleFunc("/recipes/{id}", recipesHandler.DeleteRecipe).Methods("DELETE")
-
+	recipesSubRouter := router.PathPrefix("/recipes").Subrouter()
+	NewRecipesHandler(store, recipesSubRouter)
 
 	http.ListenAndServe(":8010", router)
 }
@@ -54,10 +46,18 @@ type RecipesHandler struct{
 	store recipeStore
 }
 
-func NewRecipesHandler(s recipeStore) *RecipesHandler {
-	return &RecipesHandler{
-		store: s,
+func NewRecipesHandler(store recipeStore, router *mux.Router) *RecipesHandler {
+	handler :=  &RecipesHandler{
+		store: store,
 	}
+
+	router.HandleFunc("/", handler.ListRecipes).Methods("GET")
+	router.HandleFunc("/", handler.CreateRecipe).Methods("POST")
+	router.HandleFunc("/{id}", handler.GetRecipe).Methods("GET")
+	router.HandleFunc("/{id}", handler.UpdateRecipe).Methods("PUT")
+	router.HandleFunc("/{id}", handler.DeleteRecipe).Methods("DELETE")
+
+	return handler
 }
 
 func (h RecipesHandler) CreateRecipe(w http.ResponseWriter, r *http.Request) {
