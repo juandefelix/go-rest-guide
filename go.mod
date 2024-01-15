@@ -1,4 +1,4 @@
-module example/jetbraind-rest-tutorial
+module example/jetbrain-rest-tutorial
 
 go 1.21.4
 
