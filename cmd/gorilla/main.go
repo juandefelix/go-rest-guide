@@ -28,8 +28,11 @@ func main() {
 	store := recipes.NewMemStore()
 	router := mux.NewRouter()
 
-	recipesSubRouter := router.PathPrefix("/recipes").Subrouter()
-	NewRecipesHandler(store, recipesSubRouter)
+	home := homeHandler{}
+
+	router.HandleFunc("/", home.ServeHTTP)
+	recipesSubrouter := router.PathPrefix("/recipes").Subrouter()
+	NewRecipesHandler(store, recipesSubrouter)
 
 	http.ListenAndServe(":8010", router)
 }
