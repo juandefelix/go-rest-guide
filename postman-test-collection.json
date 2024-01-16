@@ -1,0 +1,401 @@
+{
+	"info": {
+		"_postman_id": "2734b7ee-2fb7-41ce-a069-9bf3cb410605",
+		"name": "Go REST tutorials from JetBrains",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "426746"
+	},
+	"item": [
+		{
+			"name": "List Recipes",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/recipes",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"recipes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create recipe",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"Ham and cheese toasties\",\n  \"ingredients\": [\n    {\n      \"name\": \"bread\"\n    },{\n      \"name\": \"ham\"\n    },{\n      \"name\": \"cheese\"\n    },{\n      \"name\": \"butter\"\n    }\n  ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/recipes/",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"recipes",
+						""
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Ham and cheese Sandwich",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Ham and cheese toasties\",\n  \"ingredients\": [\n    {\n      \"name\": \"bread\"\n    },{\n      \"name\": \"ham\"\n    },{\n      \"name\": \"cheese\"\n    }\n  ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/recipes/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"recipes",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Wed, 10 Jan 2024 22:00:23 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "0"
+						}
+					],
+					"cookie": [],
+					"body": null
+				},
+				{
+					"name": "Bacon and cheese sandwich",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Bacon and cheese sandwich\",\n  \"ingredients\": [\n    {\n      \"name\": \"bread\"\n    },{\n      \"name\": \"bacon\"\n    },{\n      \"name\": \"cheese\"\n    }\n  ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/recipes/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"recipes",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Wed, 10 Jan 2024 22:01:56 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "0"
+						}
+					],
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Get recipe",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/recipes/bacon-and-cheese-sandwich",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"recipes",
+						"bacon-and-cheese-sandwich"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update recipe",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"Bacon and cheese sandwich\",\n  \"ingredients\": [\n    {\n      \"name\": \"bread\"\n    },{\n      \"name\": \"bacon\"\n    },{\n      \"name\": \"american cheese\"\n    }\n  ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/recipes/bacon-and-cheese-sandwich",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"recipes",
+						"bacon-and-cheese-sandwich"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Ham and cheese Sandwich",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Ham and cheese toasties\",\n  \"ingredients\": [\n    {\n      \"name\": \"bread\"\n    },{\n      \"name\": \"ham\"\n    },{\n      \"name\": \"cheese\"\n    }\n  ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/recipes",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"recipes"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Wed, 10 Jan 2024 22:00:23 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "0"
+						}
+					],
+					"cookie": [],
+					"body": null
+				},
+				{
+					"name": "Bacon and cheese sandwich",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Bacon and cheese sandwich\",\n  \"ingredients\": [\n    {\n      \"name\": \"bread\"\n    },{\n      \"name\": \"bacon\"\n    },{\n      \"name\": \"cheese\"\n    }\n  ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/recipes/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"recipes",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Wed, 10 Jan 2024 22:01:56 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "0"
+						}
+					],
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Delete recipe",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"Bacon and cheese sandwich\",\n  \"ingredients\": [\n    {\n      \"name\": \"bread\"\n    },{\n      \"name\": \"bacon\"\n    },{\n      \"name\": \"american cheese\"\n    }\n  ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/recipes/bacon-and-cheese-sandwich",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"recipes",
+						"bacon-and-cheese-sandwich"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Han and cheese Sandwich",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Ham and cheese toasties\",\n  \"ingredients\": [\n    {\n      \"name\": \"bread\"\n    },{\n      \"name\": \"ham\"\n    },{\n      \"name\": \"cheese\"\n    }\n  ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/recipes/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"recipes",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Wed, 10 Jan 2024 22:00:23 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "0"
+						}
+					],
+					"cookie": [],
+					"body": null
+				},
+				{
+					"name": "bacon and cheese sandwich",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Bacon and cheese sandwich\",\n  \"ingredients\": [\n    {\n      \"name\": \"bread\"\n    },{\n      \"name\": \"bacon\"\n    },{\n      \"name\": \"cheese\"\n    }\n  ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/recipes/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"recipes",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Wed, 10 Jan 2024 22:01:56 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "0"
+						}
+					],
+					"cookie": [],
+					"body": null
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "http://localshot:8080",
+			"type": "string"
+		}
+	]
+}
